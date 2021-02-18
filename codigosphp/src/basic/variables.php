@@ -20,3 +20,8 @@ $array_asociativo = [
   'email' => 'carlos@correo.com',
   'ciudad' => 'Málaga'
 ];
+
+echo $array_asociativo['telefono'];
+print_r($array_asociativo);
+
+?>

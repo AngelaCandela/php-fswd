@@ -6,7 +6,7 @@ $password = 'pass';
 $database = 'basededatos';
 
 try {
-  $conexion = new PDO("mysql:host=$server; dbname=$database", $user, $password);
+  $conn = new PDO("mysql:host=$server; dbname=$database", $user, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   $sql = "DELETE FROM productos WHERE id=3";
@@ -18,4 +18,4 @@ try {
 }
 
 // Una vez terminado, cerramos la conexión
-$conexion = null;
+$conn = null;

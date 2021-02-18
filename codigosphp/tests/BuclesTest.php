@@ -33,7 +33,6 @@ final class BuclesTest extends TestCase
 
     public function testFor(): void
     {
-      $number = 0;
       $arrayOfNumbers = [];
       
       for($number = 0; $number <= 5; $number++){
@@ -75,37 +74,47 @@ final class BuclesTest extends TestCase
       assertEquals(['Carlos','carlos@correo.com','Benalmádena'], $arrayOfValues);
     }
 
-    // public function testEjercicio1(): void
-    // {
-    //   $users = [
-    //     ['name' => 'Carlos', 'email' => 'carlos@correo.com', 'city' => 'Benalmádena'],
-    //     ['name' => 'Carmen', 'email' => 'carmen@correo.com', 'city' => 'Fuengirola'],
-    //     ['name' => 'Carmelo', 'email' => 'carmelo@correo.com', 'city' => 'Torremolinos'],
-    //     ['name' => 'Carolina', 'email' => 'carolina@correo.com', 'city' => 'Málaga'],
-    //   ]; 
-    //   $emails = [];
+    public function testEjercicio1(): void
+    {
+      $users = [
+        ['name' => 'Carlos', 'email' => 'carlos@correo.com', 'city' => 'Benalmádena'],
+        ['name' => 'Carmen', 'email' => 'carmen@correo.com', 'city' => 'Fuengirola'],
+        ['name' => 'Carmelo', 'email' => 'carmelo@correo.com', 'city' => 'Torremolinos'],
+        ['name' => 'Carolina', 'email' => 'carolina@correo.com', 'city' => 'Málaga'],
+      ]; 
+      $emails = [];
+
+      foreach ($users as $user) {
+        $emails[] = $user['email'];
+      }      
       
-    //   // Conseguir un array con los correos de los usuarios utilizando foreach
+      // Conseguir un array con los correos de los usuarios utilizando foreach
 
-    //   assertEquals(['carlos@correo.com','carmen@correo.com','carmelo@correo.com','carolina@correo.com'], $emails);
-    // }
+      assertEquals(['carlos@correo.com','carmen@correo.com','carmelo@correo.com','carolina@correo.com'], $emails);
+    }
 
-    // public function testEjercicio2(): void
-    // {
-    //   $employees = [
-    //     ['name' => 'Carlos', 'email' => 'carlos@miempresa.net', 'city' => 'Benalmádena'],
-    //     ['name' => 'Carmen', 'email' => 'carmen@miempresa.net', 'city' => 'Fuengirola'],
-    //     ['name' => 'Carmelo', 'email' => 'carmelo@miempresa.net', 'city' => 'Torremolinos'],
-    //     ['name' => 'Carolina', 'email' => 'carolina@miempresa.net', 'city' => 'Málaga'],
-    //   ]; 
+    public function testEjercicio2(): void
+    {
+      $employees = [
+        ['name' => 'Carlos', 'email' => 'carlos@miempresa.net', 'city' => 'Benalmádena'],
+        ['name' => 'Carmen', 'email' => 'carmen@miempresa.net', 'city' => 'Fuengirola'],
+        ['name' => 'Carmelo', 'email' => 'carmelo@miempresa.net', 'city' => 'Torremolinos'],
+        ['name' => 'Carolina', 'email' => 'carolina@miempresa.net', 'city' => 'Málaga'],
+      ]; 
+
+      foreach ($employees as $index => $employee) {
+        $splitEmail = explode("@", $employee['email']);
+        $newEmail = $splitEmail[0].'@miempresa.com';
+        $employees[$index]['email'] = $newEmail;
+      } 
       
-    //   // La empresa va a cambiar el dominio de los correos de miempresa.net a miempresa.com
-    //   // Imáginate que en total son 1500 empleados...
-    //   // Cambiar los correos de todos los empleados mediante un bucle foreach
-    //   // Pista: 
-    //   //   assertEquals(['carlos', 'miempresa.net'], explode("@", 'carlos@miempresa.net'))
+      // La empresa va a cambiar el dominio de los correos de miempresa.net a miempresa.com
+      // Imáginate que en total son 1500 empleados...
+      // Cambiar los correos de todos los empleados mediante un bucle foreach
+      // Pista: 
+      //   assertEquals(['carlos', 'miempresa.net'], explode("@", 'carlos@miempresa.net'))
 
-    //   assertEquals('carlos@miempresa.com', $employees[0]['email']);
-    //   assertEquals('carolina@miempresa.com', $employees[3]['email']);
-    // }
+      assertEquals('carlos@miempresa.com', $employees[0]['email']);
+      assertEquals('carolina@miempresa.com', $employees[3]['email']);
+    }
 }

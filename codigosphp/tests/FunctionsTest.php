@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertEquals;
 
-require('./src/functions/functions.php');
+require('./codigosphp/src/functions/functions.php');
 
 final class FunctionsTest extends TestCase
 {

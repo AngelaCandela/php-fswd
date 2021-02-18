@@ -6,14 +6,16 @@ $password = 'pass';
 $database = 'basededatos';
 
 try {
-  $conexion = new PDO("mysql:host=$server; dbname=$database", $user, $password);
+  $conn = new PDO("mysql:host=$server; dbname=$database", $user, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   $stmt = $conn->prepare("SELECT * FROM productos");
   $stmt->execute();
 
-  $results = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  foreach($resulsts as $result) {
+  $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  $results = $stmt->fetchAll();
+  
+  foreach($results as $result) {
     print_r($result);
   }
 } catch(PDOException $e) {
@@ -21,4 +23,4 @@ try {
 }
 
 // Una vez terminado, cerramos la conexión
-$conexion = null;
+$conn = null;
