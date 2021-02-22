@@ -10,23 +10,17 @@
 
 <body>
     <?php require_once "menu.php"; ?>
-    <table>
+    
+    <table>        
         <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Age</th>
             <th>City</th>
+            <th>Actions</th>
         </tr>
 
         <?php
-
-            /* $people = [
-                ['name' => 'Carlos', 'email' => 'carlos@correo.com', 'age' => 20, 'city' => 'Benalmádena'],
-                ['name' => 'Carmen', 'email' => 'carmen@correo.com', 'age' => 15, 'city' => 'Fuengirola'],
-                ['name' => 'Carmelo', 'email' => 'carmelo@correo.com', 'age' => 17, 'city' => 'Torremolinos'],
-                ['name' => 'Carolina', 'email' => 'carolina@correo.com', 'age' => 18, 'city' => 'Málaga'],
-            ]; */
-
             $server = 'localhost';
             $user = 'root';
             $password = 'example';
@@ -40,8 +34,10 @@
                 echo "Error: " . $query . "<br>" . $e->getMessage();
             }
 
+            $sortByColumn = id;
+
             try {             
-                $stmt = $conn->prepare("SELECT * FROM employees");
+                $stmt = $conn->prepare("SELECT * FROM employees ORDER BY $sortByColumn");
                 $stmt->execute();
               
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -53,6 +49,9 @@
                             <td>".$result['email']."</td>
                             <td>".$result['age']."</td>
                             <td>".$result['city']."</td>
+                            <td>
+                            <a href='deleteEmployee.php?id=$result[id]'><button onClick= 'return confirm(`Are you sure?`)'>DELETE</button></a>
+                            </td>
                         </tr>";
                 }
             } catch(PDOException $e) {
@@ -64,6 +63,27 @@
         ?>
         
     </table>
+
+    <div>
+
+    <h3>Add an employee to the list</h3>
+        <form action="employeeSignupConfirmation.php" method="post">
+
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" />
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" />
+        
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" />
+
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" />
+        
+            <input type="submit" value="Add employee">
+        </form>
+    </div>
     <script src="main.js">
 </body>
 </html>
