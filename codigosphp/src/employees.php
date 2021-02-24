@@ -12,13 +12,13 @@
     <?php require_once "menu.php"; ?>
     
     <table>        
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Age</th>
-            <th>City</th>
+    <?php echo "<tr>
+            <th><a href='?orderby=name'>Name</a></th>
+            <th><a href='?orderby=email'>Email</a></th>
+            <th><a href='?orderby=age'>Age</a></th>
+            <th><a href='?orderby=city'>City</a></th>
             <th>Actions</th>
-        </tr>
+        </tr>" ?>
 
         <?php
             $server = 'localhost';
@@ -34,10 +34,15 @@
                 echo "Error: " . $query . "<br>" . $e->getMessage();
             }
 
-            $sortByColumn = id;
+            try {
+                
+                if(isset($_GET['orderby'])) {
+                    $orderBy = $_GET['orderby'];
+                } else {
+                    $orderBy = 'name';
+                }
 
-            try {             
-                $stmt = $conn->prepare("SELECT * FROM employees ORDER BY $sortByColumn");
+                $stmt = $conn->prepare("SELECT * FROM employees ORDER BY $orderBy");
                 $stmt->execute();
               
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
